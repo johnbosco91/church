@@ -1,0 +1,13 @@
+.footer {
+    font-size: 18px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+}
+.account-btn {
+    background: #96bec3 !important;
+    background: linear-gradient(to right, #96bec3 0%, #96bec3 100%) !important;
+}

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\db\Exception;
 
 /**
  * LoginForm is the model behind the login form.
@@ -36,6 +37,17 @@ class LoginForm extends Model
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password'),
+        ];
+    }
+
+    /**
      * Validates the password.
      * This method serves as the inline validation for password.
      *
@@ -56,10 +68,16 @@ class LoginForm extends Model
     /**
      * Logs in a user using the provided username and password.
      * @return bool whether the user is logged in successfully
+     * @throws Exception
      */
     public function login()
     {
         if ($this->validate()) {
+            $date = date('Y-m-d H:i:s');
+            Yii::$app->db->createCommand("UPDATE user SET last_login=:last_log  WHERE id=:id", [
+                ':last_log' => $date,
+                ':id' => $this->getUser()->id
+            ])->execute();
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;

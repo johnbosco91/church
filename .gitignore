@@ -34,15 +34,7 @@ tests/_support/_generated
 
 /index.html
 /yii.bat
-/config/*
-!/config/db-example.php
-!/config/web.php
-!/config/console.php
-!/config/params_dev.php
-!/config/params_prod.php
-!/config/params.php
-!/config/test_db.php
-!/config/test.php
+/config/db.php
 /vendor*
 /tests/
 /web/index.php

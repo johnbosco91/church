@@ -31,4 +31,6 @@ class HelloController extends Controller
 
         return ExitCode::OK;
     }
+
+    // ./yii message/extract -l en -f 'php' -p '@app/common/messages' -s '@app'
 }

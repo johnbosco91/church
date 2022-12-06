@@ -8,14 +8,13 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
-class SiteController extends Controller
+class ChurchController extends Controller
 {
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -41,7 +40,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -56,15 +55,15 @@ class SiteController extends Controller
 
     public function actionLanguage()
     {
-        if (isset($_POST['lang'])) {
+         if (isset($_POST['lang'])) {
             $cookie = new yii\web\Cookie([
                 'name' => 'lang',
                 'value' => $_POST['lang'],
                 'expire' => time() + 60 * 60 * 24 * 30, // 30 days
             ]);
             yii::$app->getResponse()->getCookies()->add($cookie);
+            Yii::$app->language = Yii::$app->getRequest()->getCookies()->getValue('lang');
         }
-
     }
 
     /**
@@ -72,7 +71,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         if (Yii::$app->getRequest()->getCookies()->has('lang')) {
             Yii::$app->language = Yii::$app->getRequest()->getCookies()->getValue('lang');
